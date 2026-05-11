@@ -1,0 +1,60 @@
+this script creates table in bronze scehma
+
+Create or alter Procedure BRONZE.LOAD_BRONZE as 
+Begin
+ BEGIN TRY
+			print '==================================='
+			print '>>INSERTING DATA IN BRONZE ERP TABLE'
+			print '==================================='
+			TRUNCATE TABLE [Bronze].[CRM_cust_info]
+
+			Bulk insert [Bronze].[CRM_cust_info]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_crm\cust_info.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+
+			TRUNCATE TABLE [Bronze].[crm_prd_info]
+			Bulk insert [Bronze].[crm_prd_info]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_crm\prd_info.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+
+			TRUNCATE TABLE [Bronze].[crm_sales_details]
+			Bulk insert [Bronze].[crm_sales_details]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_crm\sales_details.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+
+			TRUNCATE TABLE [Bronze].[erp_cust_az12]
+			Bulk insert [Bronze].[erp_cust_az12]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_ERP\CUST_AZ12.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+
+			TRUNCATE TABLE [Bronze].[erp_loc_a101]
+			Bulk insert [Bronze].[erp_loc_a101]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_ERP\LOC_A101.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+
+			TRUNCATE TABLE [Bronze].[erp_px_cat_g1v2]
+			Bulk insert [Bronze].[erp_px_cat_g1v2]
+			from 'C:\Users\RAHUL\Documents\DATA WAREHOUSE PROJECT\source_ERP\PX_CAT_G1V2.csv'
+			 with (
+				  firstrow = 2,
+				  FIELDTERMINATOR = ',',
+				  tabLock)
+		  END TRY
+		  BEGIN catch
+		  END CATCH
+END
